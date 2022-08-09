@@ -12,6 +12,4 @@ artifacts
 package-lock.json
 .env
 
-flat/
-
 slitherResult.json

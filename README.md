@@ -97,7 +97,7 @@ npx hardhat verify --network matic 0x4b75233D4FacbAa94264930aC26f9983e50C11AF
 #
 
 ## DOCUMENTATION:
-* ### <a href="https://hardhat.org/docs">Hardhat documantation</a>
+* ### <a href="https://hardhat.org/docs">Hardhat docs</a>
 * ### <a href="https://docs.polygon.technology/docs/develop/hardhat">Polygon Wiki</a>
 
 

@@ -1,6 +1,7 @@
 # Basic README.md
 
-    If you are using Windows, we strongly recommend you use Windows Subsystem for Linux (also known as WSL 2). You can use Hardhat without it, but it will work better if you use it.
+    If you are using Windows, we strongly recommend you use Windows Subsystem for Linux (also known as WSL 2). 
+    You can use Hardhat without it, but it will work better if you use it.
 
 To install Node.js using WSL 2, please read this <a href="https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl">guide</a>
 #

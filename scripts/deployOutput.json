@@ -1,8 +1,8 @@
 {
   "rinkeby": {
     "CyberGenie": {
-      "address": "0x55Ae143673313a10A3D8a36cdCB3A189C763b290",
-      "verification": "https://rinkeby.etherscan.io//address/0x55Ae143673313a10A3D8a36cdCB3A189C763b290#code"
+      "address": "0xb6F063D9612ed74De3f7d339c95125cD14254114",
+      "verification": "https://rinkeby.etherscan.io//address/0xb6F063D9612ed74De3f7d339c95125cD14254114#code"
     }
   },
   "mumbai": {

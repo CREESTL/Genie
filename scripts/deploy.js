@@ -43,6 +43,8 @@ async function main() {
   OUTPUT_DEPLOY[network.name][contractName].verification = url;
   // Verify the contract
   // Provide all contract's dependencies as separate files
+  // NOTE It may fail with "Already Verified" error. Do not pay attention to it. Verification will
+  // be done correctly!
   try { 
     await hre.run("verify:verify", {
       address: genie.address,

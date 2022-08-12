@@ -1,103 +1,76 @@
-# Basic README.md
+# CyberGenie smart-contract
 
-    If you are using Windows, we strongly recommend you use Windows Subsystem for Linux (also known as WSL 2). 
-    You can use Hardhat without it, but it will work better if you use it.
+The following information will guide you through the process of building and deploying the contract yourself.  
 
-To install Node.js using WSL 2, please read this <a href="https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl">guide</a>
-#
-## First run
-There are a few technical requirements before we start. Please install the following:
+## Prerequisites :page_with_curl:
+- Install [Node.js](https://nodejs.org/en/download/)
+- Clone this repository with `git clone https://git.sfxdx.ru/nft-audit/nft-audit-sc.git`
+- Navigate to the directory with the cloned code
+- Install [Hardhat](https://hardhat.org/) with `npm install --save-dev hardhat`
+- Install all required dependencies with `npm install`
+- Create a file called `.env` in the root of the project with the same contents as `.env.example`
+- Copy your wallet's private key (see [Wallets](##Wallets)) to `.env` file
+    ```
+    PRIVATE_KEY=***your private key***
+    ```
+- Create an account on [Etherscan](https://etherscan.io/). Go to `Account -> API Keys`. Create a new API key. Copy it to `.env` file
+    ```
+    ETHERSCAN_API_KEY=***your etherscan API key***
+    ```
+- Create an account on [Polygonscan](https://polygonscan.com/). Go to `Account -> API Keys`. Create a new API key. Copy it to `.env` file
+    ```
+    POLYGONSCAN_API_KEY=***your polygonscan API key***
+    ```
+- Create an account on [Infura](https://infura.io/). Go to `Dashboard -> Create new key -> Manage key`. Copy `API key` to `.env` file
+    ```
+    INFURA_API_KEY=***your infura API key***
+    ```
+:warning:__DO NOT SHARE YOUR .env FILE IN ANY WAY OR YOU RISK TO LOSE ALL YOUR FUNDS__:warning:
 
-* <a href="https://nodejs.org/en/">Node.js v10+ LTS and npm</a> (comes with Node)
-* <a href="https://git-scm.com/">Git</a>
+## Main part
 
-Once we have those installed, you need to create an npm project by going to an empty folder, running npm init, and following its instructions to install Hardhat. Once your project is ready, you should run:
-
-```shell
-npm install --save-dev hardhat
+### 1. Build
+```
+npx hardhat compile
 ```
 
-```shell
-npm install --save-dev @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-network-helpers @nomicfoundation/hardhat-chai-matchers @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan chai ethers hardhat-gas-reporter solidity-coverage @typechain/hardhat typechain @typechain/ethers-v5 @ethersproject/abi @ethersproject/providers 
+### 2. Deploy
+а) __Rinkeby__ test network  
+Make sure you have _enough RinkebyETH_ tokens for testnet. You can get it for free from [faucet](https://faucet.rinkeby.io/). 
 ```
-#
+npx hardhat run scripts/deploy.js --network rinkeby
+```  
 
-## Setting up the contract
-
-* Go to ```hardhat.config.js```
-* Update the ```hardhat-config``` with matic-network-credentials
-* Create ```.env``` file in the root to store your private key
-* Add Polygonscan API key to ```.env``` file to verify the contract on Polygonscan. You can generate an API key by <a href="https://polygonscan.com/register">creating an account</a>
-
-**Example:** 
+b) __Mumbai__ test network
+Make sure you have _enough MATIC_ tokens for testnet. You can get it for free from [faucet](https://faucet.polygon.technology/). 
 ```
-require('dotenv').config();
-require("@nomiclabs/hardhat-ethers");
-require("@nomiclabs/hardhat-etherscan");
-
-module.exports = {
-  defaultNetwork: "matic",
-  networks: {
-    hardhat: {
-    },
-    matic: {
-      url: "https://rpc-mumbai.maticvigil.com",
-      accounts: [process.env.PRIVATE_KEY]
-    }
-  },
-  etherscan: {
-    apiKey: process.env.POLYGONSCAN_API_KEY
-  },
-  solidity: {
-    version: "0.8.0",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200
-      }
-    }
-  },
-}
+npx hardhat run scripts/deploy.js --network mumbai
 ```
-#
-## Testing the Contract
-
-To run tests with Hardhat, you just need to type the following:
-
+c) __Ethereum__ main network  
+Make sure you have _enough real ether_ in your wallet. Deployment to the mainnet costs money!
 ```
-npx hardhat test
+npx hardhat run scripts/deploy.js --network ethereum
 ```
 
-And this is an expected output:
-
+c) __Polygon__ main network  
+Make sure you have _enough real MATIC in your wallet. Deployment to the mainnet costs money!
 ```
-Token contract
-    ✓ Test example (654ms)
-
-1 passing (663ms)
+npx hardhat run scripts/deploy.js --network ethereum
 ```
-#
-## Deploying on Matic Network
-Run this command in root of the project directory:
+Deployment script takes more than 1.5 minutes to complete. Please, _be patient_.  
 
+After the contracts get deployed you can find their _addresses_ and code verification _URLs_ in the `deployOutput.json` file.
+You __have to__ provide these wallets with real/test tokens in order to call contracts' methods from them. 
+
+Please note that all deployed contracts __are verified__ on either [Etherscan](https://etherscan.io/) (testnet [Ethersan](https://rinkeby.etherscan.io/)) or [Polygonscan](https://polygonscan.com/) (testnet [Polygonscan](https://mumbai.polygonscan.com/)).
+
+## Wallets
+For deployment you will need to use either _your own wallet_ or _a generated one_. 
+If you choose to use your existing wallet, then you will need to be able to export (copy/paste) its private key. For example, you can export private key from your MetaMask wallet.  
+But if you choose to create a fresh wallet for this project, you should use `createWallet` script from `scripts/` directory.
 ```
-npx hardhat run scripts/deploy.js --network matic
+npx hardhat run scripts/createWallet.js
 ```
-
-The contract will be deployed on Matic's Mumbai Testnet, and you can check the deployment status here: https://mumbai.polygonscan.com/
-
-If you want to change the network, you have to change the ```--network``` settings
-
-#
-Run the following commands to quickly verify your contract on Polygonscan. This makes it easy for anyone to see the source code of your deployed contract. For contracts that have a constructor with a complex argument list, <a href="https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-etherscan">see here</a>
-```
-npm install --save-dev @nomiclabs/hardhat-etherscan
-npx hardhat verify --network matic 0x4b75233D4FacbAa94264930aC26f9983e50C11AF
-```
-#
-
-## DOCUMENTATION:
-* ### <a href="https://hardhat.org/docs">Hardhat docs</a>
-* ### <a href="https://docs.polygon.technology/docs/develop/hardhat">Polygon Wiki</a>
-
+This will generate a single new wallet and show its address and private key. __Save__ them somewhere else!
+Wallet's private key should be pasted into the `.env` file (see [Prerequisites](##Prerequisites)). 
 

@@ -1,49 +1,26 @@
 {
-  "networks": {
-    "donau": {
-      "XTRXToken": {
-        "address": "0x753eF47D60E6E4683B318D694F27d1D4aF16737b"
-      },
-      "Oracle": {
-        "address": "0x5c6dB75D7242941D36D0F828B993D2E1b26DA4Dc",
-        "oracleOperatorAddress": "0x8816c5c8373f4E6944632CeD35F7a5b12C556065"
-      },
-      "GameController": {
-        "address": "0x09C8E1A082eBf98ee244329132B07C0C07f1184D"
-      },
-      "PoolController": {
-        "address": "0x8548E5B66f490c3A87487FAb8Efb9B903221733f"
-      },
-      "Poker": {
-        "address": "0x347b59796BCfff9346D8906D239448eD745E2cBC",
-        "pokerOperatorAddress": "0x9272Dd84Ab78230c6B007Da7c9710C0a31c7c39A"
-      },
-      "Migrations": {
-        "address": "0xADd04c12ebD0BE1D677eBabB01297DeE879087aA"
-      }
-    },
-    "mainnet": {
-      "XTRXToken": {
-        "address": ""
-      },
-      "Oracle": {
-        "address": "",
-        "oracleOperatorAddress": ""
-      },
-      "GameController": {
-        "address": "",
-        "oracleAddress": ""
-      },
-      "PoolController": {
-        "address": ""
-      },
-      "Poker": {
-        "address": "",
-        "pokerOperatorAddress": ""
-      },
-      "Migrations": {
-        "address": ""
-      }
+  "rinkeby": {
+    "CyberGenie": {
+      "address": "0x55Ae143673313a10A3D8a36cdCB3A189C763b290",
+      "verification": "https://rinkeby.etherscan.io//address/0x55Ae143673313a10A3D8a36cdCB3A189C763b290#code"
+    }
+  },
+  "mumbai": {
+    "CyberGenie": {
+      "address": "0x8DA4658EDf968c59B07ABE739fc5217e19f198b4",
+      "verification": "https://mumbai.polygonscan.com/address/0x8DA4658EDf968c59B07ABE739fc5217e19f198b4#code"
+    }
+  },
+  "ethereum": {
+    "CyberGenie": {
+      "address": "",
+      "verification": ""
+    }
+  },
+  "polygon": {
+    "CyberGenie": {
+      "address": "",
+      "verification": ""
     }
   }
 }
